@@ -1,0 +1,81 @@
+
+body {
+  background: #f9f9f9;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.box-main-div {
+  display: block;
+  margin: 10px;
+  width: 23%;
+  border-radius: 7px;
+  background: #fff;
+  min-height: 230px;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(23,28,33,0.1);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(23,28,33,0.1);
+  box-shadow: 0px 2px 5px 0px rgba(23,28,33,0.1);
+}
+
+.sub-box-tweet-content-div {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.box-padding-div {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.tweetbox-user-image {
+  flex-basis: 49px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+}
+
+.user-image-div {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 1;
+  width: 100%;
+}
+
+.user-image-div img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.tweetbox-container-main-div div{
+  float: left;
+}
+
+.tweet-body-main {
+  word-break: break-word;
+}
+
+.tweet-user-name {
+  color: #353535;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.tweet-user-name span {
+  color: #727272;
+  font-size: 10px;
+  font-weight: 400;
+}
