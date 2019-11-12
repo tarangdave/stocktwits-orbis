@@ -85,7 +85,7 @@ class App extends React.Component {
   }
 
   sendRequest = async(symbol) => {
-    return await axios.get(`http://localhost:3000/tweets/${symbol}`,)
+    return await axios.get(`https://tyd64p9lh6.execute-api.us-east-1.amazonaws.com/dev/tweets/${symbol}`,)
         .then((response) => {
           return response;
       })
