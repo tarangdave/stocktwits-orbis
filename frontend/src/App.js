@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import CloseImg from './close-tag.png'
 import './App.css';
 
 class SearchBar extends React.Component {
@@ -135,7 +136,9 @@ class App extends React.Component {
     });
     const symbolList = this.state.symbols.map((data, i) => {
       return (
-        <li key={i}>{data}<button type="button" onClick={() => this.deleteSymbol(data)}>X</button></li>
+        <div className="new-tag" key={i}>{data}
+          <img className="remove-filter delete" src={CloseImg} onClick={() => this.deleteSymbol(data)}></img>
+        </div>
       )
     });
     return (
@@ -148,12 +151,9 @@ class App extends React.Component {
           </div>
         </nav>
         <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Input Symbol</label>
           <SearchBar onSubmit={this.onSearchSubmit} />
-          <div>
-            <ul>
-                {symbolList}
-            </ul>
+          <div className="current-showing">
+            {symbolList}
           </div>
         </div>
         <div className="tweetbox-container-main-div">

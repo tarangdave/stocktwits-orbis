@@ -79,3 +79,22 @@ body {
   font-size: 10px;
   font-weight: 400;
 }
+
+.current-showing {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.new-tag {
+  background-color: #e0edf5;
+  border-radius: 3px;
+  color: #2f5d92;
+  float: left;
+  font-weight: 500;
+  height: 28px;
+  line-height: 28px;
+  margin: 0 8px 6px 0;
+  padding: 0 1px 0 8px;
+  white-space: nowrap;
+}
