@@ -81,7 +81,8 @@ class App extends React.Component {
     this.state = {
       symbols: [],
       messages: [],
-      currentRequestStatus: {}
+      currentRequestStatus: {},
+      currentInterval: null,
     }
   }
 
@@ -102,11 +103,13 @@ class App extends React.Component {
   };
 
   deleteSymbol = async(i) => {
+    clearInterval(this.state.currentInterval);
     let symbols = this.state.symbols.filter((item, j) => i !== item);
     this.setState(state => {
         return state.symbols = symbols;
       });
-    await this.searchAgain(symbols);
+    let interval = setInterval(async() => { await this.searchAgain(symbols); }, 25000);
+    this.setState({ currentInterval: interval });
   };
 
   searchAgain = async(symbols) => {
@@ -124,9 +127,14 @@ class App extends React.Component {
   }
 
   onSearchSubmit =  async(sq) => {
+    clearInterval(this.state.currentInterval);
     this.updateSymbolList(sq);
 
     await this.searchAgain(this.state.symbols);
+
+    let interval = setInterval(async() => { await this.searchAgain(this.state.symbols); }, 30000);
+
+    this.setState({ currentInterval: interval });
 }
   render() {
     const renderBox = this.state.messages.map((data, i) => {
@@ -150,10 +158,12 @@ class App extends React.Component {
             </div>
           </div>
         </nav>
-        <div className="form-group">
-          <SearchBar onSubmit={this.onSearchSubmit} />
-          <div className="current-showing">
-            {symbolList}
+        <div className="container">
+          <div className="form-group">
+            <SearchBar onSubmit={this.onSearchSubmit} />
+            <div className="current-showing">
+              {symbolList}
+            </div>
           </div>
         </div>
         <div className="tweetbox-container-main-div">
