@@ -55,7 +55,7 @@ class TweetBox extends React.Component {
     return (
       <div className="box-main-div">
         <div className="sub-box-tweet-content-div col-lg-12 col-sm-12 col-xs-12 col-md-12">
-          <div className="tweetbox-user-image col-md-3 col-sm-3 col-lg-3 col-xs-12">
+          <div className="tweetbox-user-image col-md-3 col-sm-3 col-lg-3 col-xs-3">
             <div className="user-image-div">
               <img src={userImage}/>
             </div>
