@@ -108,6 +108,8 @@ class App extends React.Component {
     this.setState(state => {
         return state.symbols = symbols;
       });
+    await this.searchAgain(symbols);
+    
     let interval = setInterval(async() => { await this.searchAgain(symbols); }, 25000);
     this.setState({ currentInterval: interval });
   };
