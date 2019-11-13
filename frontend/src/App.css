@@ -20,6 +20,10 @@ body {
   color: #09d3ac;
 }
 
+.center-align {
+  text-align: center;
+}
+
 .box-main-div {
   display: block;
   margin: 10px;
@@ -425,6 +429,7 @@ body {
   display: inline-block;
   vertical-align: middle;
   width: 100%;
+  margin-top: 10px;
 }
 
 .new-tag {

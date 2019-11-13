@@ -26,10 +26,12 @@ class SearchBar extends React.Component {
             <div>
                 <form onSubmit={this.onEnterPress}>
                     <div>
-                        <label>Search for Symbols/Messages</label>
+                        <label><h1>Search StockTwits Tweets</h1></label>
                         <input
                             type="text"
+                            className="form-control"
                             value={ searchInput }
+                            placeholder="Press Enter after entering symbol Eg. AAPL, BABA, IBM, GOOGL..."
                             onChange={(e) => this.setState({searchInput : e.target.value})}
                         />
                     </div>
@@ -109,7 +111,7 @@ class App extends React.Component {
         return state.symbols = symbols;
       });
     await this.searchAgain(symbols);
-    
+
     let interval = setInterval(async() => { await this.searchAgain(symbols); }, 25000);
     this.setState({ currentInterval: interval });
   };
@@ -129,14 +131,17 @@ class App extends React.Component {
   }
 
   onSearchSubmit =  async(sq) => {
-    clearInterval(this.state.currentInterval);
-    this.updateSymbolList(sq);
+    if (sq) {
+      sq = sq.toUpperCase();
+      clearInterval(this.state.currentInterval);
+      this.updateSymbolList(sq);
 
-    await this.searchAgain(this.state.symbols);
+      await this.searchAgain(this.state.symbols);
 
-    let interval = setInterval(async() => { await this.searchAgain(this.state.symbols); }, 30000);
+      let interval = setInterval(async() => { await this.searchAgain(this.state.symbols); }, 30000);
 
-    this.setState({ currentInterval: interval });
+      this.setState({ currentInterval: interval });
+    }
 }
   render() {
     const renderBox = this.state.messages.map((data, i) => {
@@ -168,9 +173,11 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        { this.state.messages.length !== 0 ? 
         <div className="tweetbox-container-main-div">
           {renderBox}
-        </div>
+        </div> : <div className="container center-align"><h2>No Relevant Tweets found...</h2></div>}
+        
         
       </div>
     );
