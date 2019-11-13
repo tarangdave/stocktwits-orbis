@@ -19,7 +19,6 @@ app.use(bodyParser.json({ strict: false }));
  * @return {json} {key, value}
  */
 app.get('/tweets/:key', (req, res) => {
-    console.log(req.params.key)
     const params = {
         symbols: req.params.key,
     };

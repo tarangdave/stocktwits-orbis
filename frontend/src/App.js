@@ -89,15 +89,17 @@ class App extends React.Component {
   }
 
   sendRequest = async(symbol) => {
-    return await axios.get(`https://tyd64p9lh6.execute-api.us-east-1.amazonaws.com/dev/tweets/${symbol}`,)
-        .then((response) => {
-          return response;
-      })
-        .catch((error) => {
-        // handle error
-        console.log(error);
-        return error;
-      });
+    if (symbol.length !== 0) {
+      return await axios.get(`https://tyd64p9lh6.execute-api.us-east-1.amazonaws.com/dev/tweets/${symbol}`,)
+          .then((response) => {
+            return response;
+        })
+          .catch((error) => {
+          // handle error
+          console.log(error);
+          return error;
+        });
+    }
   }
 
   updateSymbolList = (symbol) => {
