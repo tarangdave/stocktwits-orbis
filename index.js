@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+require('dotenv').config();
+const TOKEN = process.env.ACCESS_TOKEN;
 
 const app = express();
 app.use(cors());
@@ -12,7 +14,7 @@ const AWS = require('aws-sdk');
 app.use(bodyParser.json({ strict: false }));
 
 /**
- * This is a rest endpoint to fetch data from db using the
+ * This is a rest endpoint to fetch data from stocktwits API using the
  * key passed in param.
  *
  * @param {string} key - user typed key param
@@ -23,7 +25,7 @@ app.get('/tweets/:key', (req, res) => {
         symbols: req.params.key,
     };
 
-    axios.get(`https://api.stocktwits.com/api/2/streams/symbols.json?access_token=e941ade3a6646cc861360a3d2f5d907b0be32546`, {
+    axios.get(`https://api.stocktwits.com/api/2/streams/symbols.json?access_token=${TOKEN}`, {
         data: params
     })
     .then((response) => {

@@ -3,6 +3,12 @@ import axios from 'axios';
 import CloseImg from './close-tag.png'
 import './App.css';
 
+const API_HOST = 'https://tyd64p9lh6.execute-api.us-east-1.amazonaws.com';
+const GET_TWEETS_ENDPOINT = '/dev/tweets/';
+
+/**
+ * component to render searchbar
+ */
 class SearchBar extends React.Component {
     constructor(props){
       super(props);
@@ -12,6 +18,9 @@ class SearchBar extends React.Component {
       }
     }
     
+    /**
+     * saves input entered on search bar
+     */
     onEnterPress = (e) =>{
         const { onSubmit } = this.props;
         let { searchInput } = this.state;
@@ -42,6 +51,9 @@ class SearchBar extends React.Component {
 };
 
 
+/**
+ * component for displaying tweets
+ */
 class TweetBox extends React.Component {
   constructor(props) {
     super(props);
@@ -76,6 +88,9 @@ class TweetBox extends React.Component {
   }
 }
 
+/**
+ * App contains all components that renders on webpage
+ */
 class App extends React.Component {
   constructor(props){
     super(props);
@@ -88,9 +103,14 @@ class App extends React.Component {
     }
   }
 
+  /**
+   * sends request to node backend hosted on AWS
+   * @param {array} symbol
+   * @returns {*} response
+   */
   sendRequest = async(symbol) => {
     if (symbol.length !== 0) {
-      return await axios.get(`https://tyd64p9lh6.execute-api.us-east-1.amazonaws.com/dev/tweets/${symbol}`,)
+      return await axios.get(`${API_HOST}${GET_TWEETS_ENDPOINT}${symbol}`,)
           .then((response) => {
             return response;
         })
@@ -102,10 +122,18 @@ class App extends React.Component {
     }
   }
 
+  /**
+   * updates the list of symbols entered
+   * @param {string} symbol
+   */
   updateSymbolList = (symbol) => {
     this.state.symbols.push(symbol);
   };
 
+  /**
+   * filters the deleted symbol and updates the state and fetches updated tweets
+   * @param {string} i
+   */
   deleteSymbol = async(i) => {
     clearInterval(this.state.currentInterval);
     let symbols = this.state.symbols.filter((item, j) => i !== item);
@@ -118,6 +146,10 @@ class App extends React.Component {
     this.setState({ currentInterval: interval });
   };
 
+  /**
+   * api call wrapper, updates the new tweets state
+   * @param {array} symbols
+   */
   searchAgain = async(symbols) => {
     try {
       let response = await this.sendRequest(symbols);
@@ -128,10 +160,18 @@ class App extends React.Component {
     };
   }
 
-  newTweets = (apiResponse)=>{
-    this.setState({ messages: apiResponse.data.messages });
+  /**
+   * updates messages state with new api reponse
+   * @param res
+   */
+  newTweets = (res)=>{
+    this.setState({ messages: res.data.messages });
   }
 
+  /**
+   * function called when new symbol is entered
+   * @param {string} sq
+   */
   onSearchSubmit =  async(sq) => {
     if (sq) {
       sq = sq.toUpperCase();
@@ -179,8 +219,6 @@ class App extends React.Component {
         <div className="tweetbox-container-main-div">
           {renderBox}
         </div> : <div className="container center-align"><h2>No Relevant Tweets found...</h2></div>}
-        
-        
       </div>
     );
   }
