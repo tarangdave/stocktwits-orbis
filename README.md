@@ -16,7 +16,7 @@ A web application that uses **Stocktwits API** to fetch latest tweets based on u
 ### Features
 + Filter tweets from mulitple symbols.
 + Fetch latest tweets every 30 seconds.
-+ Resposive UI.
++ Responsive UI.
 + Backend running on **serverless** architecture.
 
 Built using ReactJS, NodeJS, ExpressJS, Serverless, Stocktwits.
